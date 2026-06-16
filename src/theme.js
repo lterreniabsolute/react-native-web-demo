@@ -15,7 +15,7 @@ export const colors = {
 
 export const spacing = (n) => n * 8;
 
-// Font monospace coerente fra le piattaforme (web/iOS/Android).
+// Font monospace coerente fra le piattaforme (web/iOS/android).
 export const mono = Platform.select({
   ios: 'Courier New',
   android: 'monospace',
