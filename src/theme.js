@@ -22,6 +22,6 @@ export const mono = Platform.select({
   default: 'ui-monospace, SFMono-Regular, Menlo, monospace',
 });
 
-// Il driver nativo non esiste sul web: lì usiamo l'animazione JS.
+// Il driver native non esiste sul web: lì usiamo l'animazione JS.
 // transform/opacity restano fluide in entrambi i casi.
 export const nativeDriver = Platform.OS !== 'web';
