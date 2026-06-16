@@ -4,11 +4,13 @@ import { colors, spacing, nativeDriver } from '../theme';
 
 // React Native non ha un <select>: si compone con Pressable + una lista
 // animata. Tutto stile, tutto cross-platform.
+// NB: la proprietà si chiama `color`, non `value`: il plugin babel di
+// Reanimated scambia `.value` negli stili inline per una shared value.
 const OPTIONS = [
-  { label: 'Blu oceano', value: '#5b8cff' },
-  { label: 'Verde menta', value: '#36d6c3' },
-  { label: 'Rosa confetto', value: '#ff7ab6' },
-  { label: 'Ambra', value: '#ffb454' },
+  { label: 'Blu oceano', color: '#5b8cff' },
+  { label: 'Verde menta', color: '#36d6c3' },
+  { label: 'Rosa confetto', color: '#ff7ab6' },
+  { label: 'Ambra', color: '#ffb454' },
 ];
 
 export default function DropdownDemo() {
@@ -38,14 +40,14 @@ export default function DropdownDemo() {
 
   return (
     <View style={styles.wrap}>
-      <View style={[styles.preview, { backgroundColor: selected.value }]}>
+      <View style={[styles.preview, { backgroundColor: selected.color }]}>
         <Text style={styles.previewText}>Anteprima</Text>
       </View>
 
       <View style={styles.field}>
         <Pressable onPress={toggle} style={styles.header}>
           <View style={styles.headerLeft}>
-            <View style={[styles.swatch, { backgroundColor: selected.value }]} />
+            <View style={[styles.swatch, { backgroundColor: selected.color }]} />
             <Text style={styles.headerText}>{selected.label}</Text>
           </View>
           <Animated.Text
@@ -61,14 +63,14 @@ export default function DropdownDemo() {
         {open ? (
           <Animated.View style={[styles.list, listStyle]}>
             {OPTIONS.map((opt) => {
-              const active = opt.value === selected.value;
+              const active = opt.color === selected.color;
               return (
                 <Pressable
-                  key={opt.value}
+                  key={opt.color}
                   onPress={() => choose(opt)}
                   style={({ hovered }) => [styles.item, hovered && styles.itemHover]}
                 >
-                  <View style={[styles.swatch, { backgroundColor: opt.value }]} />
+                  <View style={[styles.swatch, { backgroundColor: opt.color }]} />
                   <Text style={[styles.itemText, active && styles.itemActive]}>{opt.label}</Text>
                 </Pressable>
               );
